@@ -18,7 +18,7 @@ const App = () => {
         const people = dataRX.data.results;
         console.log("PEOPLE",people)
         setData(people);
-
+-m
         // this.setState({data, requestParams});
     }
 
