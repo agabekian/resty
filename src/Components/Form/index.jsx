@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './Form.scss';
 
 class Form extends React.Component {
@@ -8,7 +7,7 @@ class Form extends React.Component {
     e.preventDefault();
     const formData = {
       method:'GET',
-      url: 'https://pokeapi.co/api/v2/pokemon',
+      url: 'https://swapi.dev/api/people',
     };
     this.props.handleApiCall(formData);
   }
