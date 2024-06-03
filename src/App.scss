@@ -1,4 +1,4 @@
-$backgroundColor: #337b80;
+$backgroundColor: #f8f8f8;
 
 html, body {
   height: 100%;
@@ -9,11 +9,19 @@ html, body {
 body {
   background: $backgroundColor;
   height: 100%;
+  font-family: "Apple SD Gothic Neo";
+  text-align:center;
+
 
   #root {
     display: flex;
     flex-direction: column;
     height: 100%;
+  }
+
+  button {
+    border-radius: 5%;
+    padding: 15px;
   }
 
 
