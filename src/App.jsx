@@ -1,46 +1,40 @@
-import React from 'react';
-import './App.scss';
+import { useState } from 'react';
+import Form from './Components/Form/Form.jsx';
+import axios from 'axios'; // Import Axios
 
-import Header from './Components/Header';
-import Footer from './Components/Footer';
-import Form from './Components/Form';
-import Results from './Components/Results';
+function App() {
+    const [json, setJSON] = useState({});
 
-class App extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: null,
-            requestParams: {},
-        };
+    function updateFormData(data) {
+        // Optional: Update state in App.js if needed (e.g., for displaying response)
+        console.log('API response data:', data);
     }
 
-    callApi = (requestParams) => {
-        // mock output
-        const data = {
-            count: 2,
-            results: [
-                {name: 'fake thing 1', url: 'http://fakethings.com/1'},
-                {name: 'fake thing 2', url: 'http://fakethings.com/2'},
-            ],
-        };
-        this.setState({data, requestParams});
+    function callAPI(url, method, body) {
+        console.log('Making the API call ...', url, method, body);
+
+        axios({
+            method: method,
+            url: url,
+            headers: { 'Content-Type': method === 'POST' || method === 'PUT'
+                    ? 'application/json' : undefined }, // Set header only for POST/PUT
+            data: body || {}, // Include body if provided
+        })
+            .then(response => {
+                updateFormData(response.data);
+                // Handle successful DELETE request (optional)
+                if (method === 'DELETE') {
+                    console.log('Resource deleted successfully!'); // Or display user-friendly message
+                }
+            })
+            .catch(error => console.error('API call error:', error));
     }
 
-    render() {
-        return (
-            <React.Fragment>
-                <Header />
-                    <div>Request Method: {this.state.requestParams.method}</div>
-                    <div>URL: {this.state.requestParams.url}</div>
-
-                <Form handleApiCall={this.callApi}/>
-                <Results data={this.state.data}/>
-                <Footer/>
-            </React.Fragment>
-        );
-    }
+    return (
+        <>
+            <Form callAPI={callAPI} updateFormData={updateFormData} />
+        </>
+    );
 }
 
 export default App;

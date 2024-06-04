@@ -5,6 +5,9 @@ form {
   display: inline-block;
   margin: auto;
   width: 250px;
+  input[type=radio]:checked + span {
+    background: lightblue;
+  }
 
 
   label {
