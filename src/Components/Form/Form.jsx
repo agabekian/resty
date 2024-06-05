@@ -18,10 +18,14 @@ function Form(props) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div>
-                {/*<p>Method: {formData.method} URL: {formData.url}</p>*/}
+            <div className="form-top">
                 <input onChange={handleChange} type="text" name="url"/>
-                {/*<span>URL: </span>*/}
+                <button type="submit">GO !</button>
+                {
+                    formData.method === 'post' || formData.method === 'put'
+                        ? <textarea placeholder="JSON body" onChange={handleChange}/>
+                        : <></>
+                }
             </div>
             <div className="methods">
                 <label>
@@ -49,18 +53,6 @@ function Form(props) {
                     <span>DELETE</span>
                 </label>
             </div>
-            {formData.method !== 'get' ? <div>
-                <textarea onChange={handleChange} name="body"/>
-                <div>JSON BODY FOR POST/PUT:</div>
-            </div>
-                :
-                <></>
-            }
-            <div>
-                <button type="submit">GO !</button>
-            </div>
-
-
         </form>
     );
 }

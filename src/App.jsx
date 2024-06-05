@@ -2,7 +2,7 @@ import {useState} from 'react';
 import axios from 'axios';
 import './App.scss'
 import Form from './Components/Form/Form.jsx';
-import Results from "./Components/Results/index.jsx";
+import Results from "./Components/Results/Results.jsx";
 import Header from "./Components/Header/index.jsx";
 import Footer from "./Components/Footer/index.jsx"; // Import Axios
 

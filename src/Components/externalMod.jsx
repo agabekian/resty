@@ -2,9 +2,9 @@
 // import axios from 'axios';
 //
 // import Form from './Components/Form/Form.jsx';
-// import Results from "./Components/Results/index.jsx";
-// import Header from "./Components/Header/index.jsx";
-// import Footer from "./Components/Footer/index.jsx"; // Import Axios
+// import Results from "./Components/Results/Results.jsx";
+// import Header from "./Components/Header/Results.jsx";
+// import Footer from "./Components/Footer/Results.jsx"; // Import Axios
 //
 // function App() {
 //     const [json, setJSON] = useState({}); // State to store API response data (JSON)
