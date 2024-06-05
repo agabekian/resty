@@ -21,7 +21,7 @@ function App() {
             method: method, //very cool
             url: url,
             headers: {'Content-Type': 'application/json'}, // NEEDED for PUT !, a little odd,ASK
-            data: body || {}, // Include body if provided for direct for post/put
+            data: body ? JSON.parse(body) : {}, // Include body if provided for direct for post/put
         })
             .then(response => {
                 setJSON(response.data); // Update state with response data after successful PUT
