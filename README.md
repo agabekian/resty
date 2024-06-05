@@ -19,6 +19,6 @@ Tests
 * NA
 
 ### UML
+![uml-lab-26-28.png](uml-lab-26-28.png)
 
-NOT YET REQ
 

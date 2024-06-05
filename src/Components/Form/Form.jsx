@@ -18,9 +18,15 @@ function Form(props) {
 
     return (
         <form onSubmit={handleSubmit}>
+            <h3 data-testid="method">Method: {formData.method}</h3>
+            <h3 data-testid="url"> URL: {formData.url}</h3>
             <div className="form-top">
-                <input onChange={handleChange} type="text" name="url"/>
-                <button type="submit">GO !</button>
+                <input
+                    data-testid="url-input"
+                    onChange={handleChange}
+                    type="text"
+                    name="url"/>
+                <button data-testid="fetch-api-button" type="submit">GO !</button>
                 {
                     formData.method === 'post' || formData.method === 'put'
                         ? <textarea placeholder="JSON body" onChange={handleChange}/>
@@ -30,24 +36,28 @@ function Form(props) {
             <div className="methods">
                 <label>
                     <input onChange={handleChange}
+                           data-testid="get-input"
                            type="radio" name="method"
                            value="get"/>
                     <span>GET</span>
                 </label>
                 <label>
                     <input onChange={handleChange}
+                           data-testid="post-input"
                            type="radio" name="method"
                            value="post"/>
                     <span>POST</span>
                 </label>
                 <label>
                     <input onChange={handleChange} type="radio"
+                           data-testid="put-input"
                            name="method"
                            value="put"/>
                     <span>PUT</span>
                 </label>
                 <label>
                     <input onChange={handleChange} type="radio"
+                           data-testid="delete-input"
                            name="method"
                            value="delete"/>
                     <span>DELETE</span>
