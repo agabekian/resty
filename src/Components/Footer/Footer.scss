@@ -1,0 +1,12 @@
+$backgroundColor: #b4c48b;
+$textColor: #f6f6f6;
+
+
+footer {
+  background: darken($backgroundColor, 2);
+  border-top: 1px solid #eee;
+  padding: 1em 3em;
+  margin: 0;
+  text-align: center;
+  color: $textColor;
+}
