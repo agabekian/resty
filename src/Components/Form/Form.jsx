@@ -1,7 +1,5 @@
-
-
-// Form.js
-import { useState } from 'react';
+import ('./Form.scss');
+import {useState} from 'react';
 
 function Form(props) {
     const [formData, setFormData] = useState({});
@@ -15,41 +13,54 @@ function Form(props) {
         const fieldName = e.target.name;
         const value = e.target.value;
 
-        setFormData({ ...formData, [fieldName]: value });
+        setFormData({...formData, [fieldName]: value});
     }
 
     return (
         <form onSubmit={handleSubmit}>
-            <h3>Method: {formData.method} URL: {formData.url}</h3>
             <div>
-                <span>URL: </span>
-                <input onChange={handleChange} type="text" name="url" />
+                {/*<p>Method: {formData.method} URL: {formData.url}</p>*/}
+                <input onChange={handleChange} type="text" name="url"/>
+                {/*<span>URL: </span>*/}
             </div>
-            <div>
+            <div className="methods">
                 <label>
-                    <input onChange={handleChange} type="radio" name="method" value="get" />
+                    <input onChange={handleChange}
+                           type="radio" name="method"
+                           value="get"/>
                     <span>GET</span>
                 </label>
                 <label>
-                    <input onChange={handleChange} type="radio" name="method" value="post" />
+                    <input onChange={handleChange}
+                           type="radio" name="method"
+                           value="post"/>
                     <span>POST</span>
                 </label>
                 <label>
-                    <input onChange={handleChange} type="radio" name="method" value="put" />
+                    <input onChange={handleChange} type="radio"
+                           name="method"
+                           value="put"/>
                     <span>PUT</span>
                 </label>
                 <label>
-                    <input onChange={handleChange} type="radio" name="method" value="delete" />
+                    <input onChange={handleChange} type="radio"
+                           name="method"
+                           value="delete"/>
                     <span>DELETE</span>
                 </label>
             </div>
-            <div>
+            {formData.method !== 'get' ? <div>
+                <textarea onChange={handleChange} name="body"/>
                 <div>JSON BODY FOR POST/PUT:</div>
-                <textarea onChange={handleChange} name="body" />
             </div>
+                :
+                <></>
+            }
             <div>
-                <button type="submit">Make API Call</button>
+                <button type="submit">GO !</button>
             </div>
+
+
         </form>
     );
 }

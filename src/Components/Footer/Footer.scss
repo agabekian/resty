@@ -1,12 +1,22 @@
 $backgroundColor: #b4c48b;
 $textColor: #f6f6f6;
 
+body {
+  display: flex; /* Make body a flex container */
+  min-height: 100vh; /* Set minimum height to viewport height */
+  margin: 0; /* Remove default margin */
+  font-family: sans-serif; /* Optional: Set a default font */
+}
 
 footer {
   background: darken($backgroundColor, 2);
   border-top: 1px solid #eee;
   padding: 1em 3em;
-  margin: 0;
   text-align: center;
   color: $textColor;
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  height:30px;
+  width:100%;
 }

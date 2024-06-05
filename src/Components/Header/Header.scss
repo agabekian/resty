@@ -1,11 +1,10 @@
-$backgroundColor: #8bc0c4;
-
-
 header {
-  background: darken($backgroundColor, 45);
+
+  width: 100%; /* Stretch it to full width */
   border-bottom: 1px solid #eee;
   color: #eee;
-  padding: 0;
-  margin: 0;
+  background-color: #c4d4d5;
   text-align: center;
+
+  //z-index: 100; /* Ensure header stays on top of other elements */
 }
