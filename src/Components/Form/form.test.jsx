@@ -25,4 +25,27 @@ describe('API Form', () => {
 
   });
 
+  it('should capture the request', () => {
+
+    function makeTheCall() { return; }
+
+    render(<Form callAPI={makeTheCall} />);
+
+    const methodDisplay = screen.getByTestId('method');
+    const urlDisplay = screen.getByTestId('url');
+    const urlInput = screen.getByTestId('url-input');
+    const getInput = screen.getByTestId('get-input');
+
+    let expectedMethod = 'post';
+    let expectedURL = 'localhost:3001/recipe/'
+
+    // 1 - if I type into the url and method fields, does the url display change?
+    fireEvent.change(urlInput, {target: {value: expectedURL}});
+    fireEvent.click(getInput, {target: {value: expectedMethod}});
+    expect(urlDisplay).toHaveTextContent(expectedURL);
+    console.log("XXXXXXXXXXXXXX",urlDisplay,expectedURL)
+    expect(methodDisplay).toHaveTextContent(expectedMethod);
+
+  });
+
 });

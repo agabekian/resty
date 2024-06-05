@@ -15,7 +15,7 @@ describe('App', () => {
     const submitButton = screen.getByTestId('fetch-api-button');
 
     let method = 'get';
-    let url = 'https://api-server-t97o.onrender.com/customers';
+    let url = 'http://localhost:3001/recipe/333';
 
     // 1 - if I type into the url and method fields, does the url display change?
     fireEvent.change(urlInput, {target: {value: url}});

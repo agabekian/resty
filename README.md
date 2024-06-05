@@ -8,15 +8,15 @@ postgres://ara:MQ1q4XM26MaQtgiJXbLOcepV1FKG2qN3@dpg-copd9acf7o1s73du46o0-a.orego
 
 #### Setup
 `npm install react axios sass uuid`
-.env requirements <p>
-* PORT
+
 
 #### Running the app
 * npm run dev
 
 
-Tests
-* NA
+#### Tests (2)
+* npm test 
+
 
 ### UML
 ![uml-lab-26-28.png](uml-lab-26-28.png)

@@ -3,6 +3,8 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 
 import Form from './Components/Form/Form.jsx';
+import Header from "./Components/Header/index.jsx";
+import Footer from "./Components/Footer/index.jsx";
 
 function App() {
 
@@ -28,7 +30,9 @@ function App() {
 
         let response = await axios(request);
 
-        let jsonString = response.data ? JSON.stringify( response.data, null, 2 ) : null;
+        let jsonString = response.data
+            ? JSON.stringify( response.data, null, 2 )
+            : null;
 
         // do the call to axios and setJSON with the results
         setJSON( jsonString );
@@ -48,19 +52,16 @@ function App() {
         // if( request.method && request.url ) { fetch(); }
 
         // Our chance to clean things up ...
-        return () => {
-
-        }
+        return () => {}
 
     }, [request]);
 
     return (
         <>
-            <h1>Hello Class</h1>
+            <Header/>
             <Form callAPI={makeTheAPICall} />
-            <hr />
             <pre data-testid="json-display">{json}</pre>
-            <hr />
+            <Footer/>
         </>
     )
 }
