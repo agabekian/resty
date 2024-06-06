@@ -18,8 +18,8 @@ function Form(props) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <h3 data-testid="method">Method: {formData.method}</h3>
-            <h3 data-testid="url"> URL: {formData.url}</h3>
+            <p data-testid="method">Method: {formData.method}</p>
+            <p data-testid="url"> URL: {formData.url}</p>
             <div className="form-top">
                 <input
                     data-testid="url-input"
@@ -29,7 +29,11 @@ function Form(props) {
                 <button data-testid="fetch-api-button" type="submit">GO !</button>
                 {
                     formData.method === 'post' || formData.method === 'put'
-                        ? <textarea placeholder="JSON body" onChange={handleChange}/>
+                        ? <textarea
+                            placeholder="JSON body"
+                            onChange={handleChange}
+                            name={"body"}
+                        />
                         : <></>
                 }
             </div>

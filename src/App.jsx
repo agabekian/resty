@@ -1,4 +1,5 @@
-import {useState, useEffect} from 'react';
+import {useReducer, useEffect} from 'react';
+import ourReducer from './reducer.js';
 
 import axios from 'axios';
 
@@ -8,59 +9,71 @@ import Footer from "./Components/Footer/index.jsx";
 
 function App() {
 
-    const [json, setJSON] = useState('');
-    const [request, setRequest] = useState({});
+    const initAPIState = {
+        json: '',
+        history: [],
+        request: {
+            method: '',
+            url: '',
+            body: null
+        },
+    }
+
+    const [state, dispatch] = useReducer(ourReducer, initAPIState);
+
+    function addHistory(e) {
+        e.preventDefault();
+        let action = {type: 'ADD_HISTORY', payload: state.history};
+        dispatch(action);
+    }
 
     function makeTheAPICall(url, method, body) {
 
-        let newRequest = {
-            method: method,
-            url: url,
-            data: body ? JSON.parse(body) : null
-        };
-
-        // This is actual async
-        setRequest( newRequest );
-
-        // So, this will not work
-        console.log('request', request);
+        let parseBody = body ? JSON.parse(body) : null
+        let action = {
+            type: 'NEW_REQUEST',
+            payload: {
+                method,
+                url,
+                parseBody
+            }
+        }
+        dispatch(action)
+        console.log("button pressed, reducer works here")
     }
 
     async function fetch() {
-
-        let response = await axios(request);
+        console.log("fetching....")
+        let response = await axios(state.request); // STATE as arg
 
         let jsonString = response.data
-            ? JSON.stringify( response.data, null, 2 )
+            ? JSON.stringify(response.data, null, 2)
             : null;
-
-        // do the call to axios and setJSON with the results
-        setJSON( jsonString );
+        setJson(jsonString);
     }
 
-    // with an empty dependency array, this will only run once, the first time the component is rendered
+    function setJson(string) {
+        let action = {type: 'SET_JSON', payload: string};
+        dispatch(action);
+    }
     useEffect(() => {
-        console.log("I am in the useEffect() hook")
-        // this may be a good time to fetch some data so the app is not empty
+        console.log("I am in the useEffect() hook");
     }, []);
-
     // Watch the request variable for changes
     useEffect(() => {
-        console.log('fetching from the useEffect() hook')
+        console.log("looooo",state.request)
+        if (state.request.method && state.request.url) { // Check only once
+            console.log("fetching from the useEffect() hook"); // Log for verification
+            fetch();
+        }
+    }, [state.request]);
 
-        request.method && request.url && fetch();
-        // if( request.method && request.url ) { fetch(); }
-
-        // Our chance to clean things up ...
-        return () => {}
-
-    }, [request]);
 
     return (
         <>
             <Header/>
-            <Form callAPI={makeTheAPICall} />
-            <pre data-testid="json-display">{json}</pre>
+            <Form callAPI={makeTheAPICall}/>
+            <pre data-testid="json-display">{state.json}</pre>
             <Footer/>
         </>
     )
