@@ -25,6 +25,7 @@ function Form(props) {
                     data-testid="url-input"
                     onChange={handleChange}
                     type="text"
+                    placeholder={formData.url}
                     name="url"/>
                 <button data-testid="fetch-api-button" type="submit">GO !</button>
                 {

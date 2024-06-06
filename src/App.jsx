@@ -2,7 +2,7 @@ import {useReducer, useEffect} from 'react';
 import _Reducer from './reducer.js';
 
 import axios from 'axios';
-import History from './components/History/History.jsx';
+import History from './Components/History/History.jsx';
 import Form from './Components/Form/Form.jsx';
 import Header from "./Components/Header/index.jsx";
 import Footer from "./Components/Footer/index.jsx";
@@ -55,11 +55,6 @@ function App() {
         addHistory(jsonString);
     }
 
-
-    useEffect(() => {
-        console.log("I am in the useEffect() hook");
-    }, []);
-    // Watch the request variable for changes
     useEffect(() => {
         if (state.request.method && state.request.url) { // Check only once
             console.log("fetching from the useEffect() hook"); // Log for verification
@@ -74,7 +69,7 @@ function App() {
             <Header/>
             <Form callAPI={makeTheAPICall}/>
             <pre data-testid="json-display">{state.json}</pre>
-            <History history={history}/>
+            <History history={state.history}/>
             <Footer/>
         </>
     )
