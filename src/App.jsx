@@ -1,8 +1,8 @@
 import {useReducer, useEffect} from 'react';
-import ourReducer from './reducer.js';
+import _Reducer from './reducer.js';
 
 import axios from 'axios';
-
+import History from './components/History/History.jsx';
 import Form from './Components/Form/Form.jsx';
 import Header from "./Components/Header/index.jsx";
 import Footer from "./Components/Footer/index.jsx";
@@ -19,11 +19,15 @@ function App() {
         },
     }
 
-    const [state, dispatch] = useReducer(ourReducer, initAPIState);
+    const [state, dispatch] = useReducer(_Reducer, initAPIState);
 
-    function addHistory(e) {
-        e.preventDefault();
-        let action = {type: 'ADD_HISTORY', payload: state.history};
+    function setJson(string) {
+        let action = {type: 'SET_JSON', payload: string};
+        dispatch(action);
+    }
+
+    function addHistory(obj) {
+        let action = {type: 'ADD_HISTORY', payload: obj};
         dispatch(action);
     }
 
@@ -39,32 +43,28 @@ function App() {
             }
         }
         dispatch(action)
-        console.log("button pressed, reducer works here")
     }
 
     async function fetch() {
-        console.log("fetching....")
         let response = await axios(state.request); // STATE as arg
 
         let jsonString = response.data
             ? JSON.stringify(response.data, null, 2)
             : null;
         setJson(jsonString);
+        addHistory(jsonString);
     }
 
-    function setJson(string) {
-        let action = {type: 'SET_JSON', payload: string};
-        dispatch(action);
-    }
+
     useEffect(() => {
         console.log("I am in the useEffect() hook");
     }, []);
     // Watch the request variable for changes
     useEffect(() => {
-        console.log("looooo",state.request)
         if (state.request.method && state.request.url) { // Check only once
             console.log("fetching from the useEffect() hook"); // Log for verification
             fetch();
+
         }
     }, [state.request]);
 
@@ -74,6 +74,7 @@ function App() {
             <Header/>
             <Form callAPI={makeTheAPICall}/>
             <pre data-testid="json-display">{state.json}</pre>
+            <History history={history}/>
             <Footer/>
         </>
     )

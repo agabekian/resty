@@ -3,7 +3,7 @@
 // Handle an action ... actions are an object that have 2 properties
 // 1: type - the type of action that is being dispatched
 // 2: payload - the data that is being sent to the reducer
-const ourReducer = (state, action) => {
+const _Reducer = (state, action) => {
 
   switch (action.type) {
     case 'NEW_REQUEST':
@@ -20,12 +20,5 @@ const ourReducer = (state, action) => {
   }
 }
 
-export default ourReducer;
+export default _Reducer;
 
-
-/*
-  let action = { type: 'INCREMENT'};
-  let initialState = { count: 0 };
-  let expectedState = { count: 1 };
-  expect (ourReducer(initialState, action)).toEqual(expectedState);
-*/
