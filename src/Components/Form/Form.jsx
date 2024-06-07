@@ -12,7 +12,6 @@ function Form(props) {
     function handleChange(e) {
         const fieldName = e.target.name;
         const value = e.target.value;
-
         setFormData({...formData, [fieldName]: value});
     }
 
@@ -33,7 +32,7 @@ function Form(props) {
                         ? <textarea
                             placeholder="JSON body"
                             onChange={handleChange}
-                            name={"body"}
+                            name="body"
                         />
                         : <></>
                 }

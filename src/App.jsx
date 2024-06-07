@@ -34,18 +34,26 @@ function App() {
     function makeTheAPICall(url, method, body) {
 
         let parseBody = body ? JSON.parse(body) : null
+        // console.log("PARSED", parseBody)
+
         let action = {
             type: 'NEW_REQUEST',
             payload: {
                 method,
                 url,
-                parseBody
+                data: parseBody      //axios expects DATA not BODY --- damn that was painful
             }
         }
         dispatch(action)
     }
 
+    useEffect(() => {
+        state.request.method && state.request.url && fetch();// Check only once
+
+    }, [state.request]);
+
     async function fetch() {
+        console.log("BODY", state.request.body); //sends ok
         let response = await axios(state.request); // STATE as arg
 
         let jsonString = response.data
@@ -54,15 +62,6 @@ function App() {
         setJson(jsonString);
         addHistory(jsonString);
     }
-
-    useEffect(() => {
-        if (state.request.method && state.request.url) { // Check only once
-            console.log("fetching from the useEffect() hook"); // Log for verification
-            fetch();
-
-        }
-    }, [state.request]);
-
 
     return (
         <>
