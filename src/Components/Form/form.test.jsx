@@ -43,7 +43,6 @@ describe('API Form', () => {
     fireEvent.change(urlInput, {target: {value: expectedURL}});
     fireEvent.click(getInput, {target: {value: expectedMethod}});
     expect(urlDisplay).toHaveTextContent(expectedURL);
-    console.log("XXXXXXXXXXXXXX",urlDisplay,expectedURL)
     expect(methodDisplay).toHaveTextContent(expectedMethod);
 
   });

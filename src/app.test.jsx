@@ -119,8 +119,33 @@ describe('App', () => {
 
   });
 
-  // it('should do a delete api call', async () => {
+  it('should do a DELETE api call', async () => {
 
-  // });
+    render(<App />);
+
+    const urlInput = screen.getByTestId('url-input');
+    const deleteInput = screen.getByTestId('delete-input');
+    const submitButton = screen.getByTestId('fetch-api-button');
+
+    let method = 'delete';
+    let url = '/recipe/1';
+
+    // 1 - if I type into the url and method fields, does the url display change?
+    fireEvent.change(urlInput, {target: {value: url}});
+    fireEvent.click(deleteInput, {target: {value: method}});
+    fireEvent.click(submitButton);
+
+    // does the json display show the results of the API call?
+
+    // 1. wait for the json-display to appear after the call is done
+    await screen.findByTestId('json-display');
+
+    // 2. convert whatever is showing in the display to JSON
+    const displayedJSON = JSON.parse(screen.getByTestId('json-display').textContent);
+
+    // 3. compare the displayed JSON to what we expect (from the mocked server)
+    expect(displayedJSON).toEqual(deleteReturn);
+
+  });
 
 });

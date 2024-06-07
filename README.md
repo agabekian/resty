@@ -14,7 +14,7 @@ postgres://ara:MQ1q4XM26MaQtgiJXbLOcepV1FKG2qN3@dpg-copd9acf7o1s73du46o0-a.orego
 * npm run dev
 
 
-#### Tests (2)
+#### Tests (4)
 * npm test 
 
 
